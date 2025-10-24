@@ -3,6 +3,8 @@ package com.emailtest.service.controller;
 import com.emailtest.service.dto.EmailRequest;
 import com.emailtest.service.service.EmailService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,6 +18,7 @@ import java.util.Map;
 @RequestMapping("/api/email")
 public class EmailController {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
     private final EmailService emailService;
 
     public EmailController(EmailService emailService) {
@@ -28,8 +31,9 @@ public class EmailController {
             emailService.sendEmail(emailRequest);
             return ResponseEntity.ok("Email sent successfully!");
         } catch (Exception e) {
+            logger.error("Failed to send email", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to send email: " + e.getMessage());
+                    .body("Failed to send email. Please check your email configuration and try again.");
         }
     }
 
