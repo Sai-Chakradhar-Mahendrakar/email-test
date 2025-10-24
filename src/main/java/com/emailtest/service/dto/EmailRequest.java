@@ -1,9 +1,24 @@
 package com.emailtest.service.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class EmailRequest {
+    @NotBlank(message = "Receiver email is required")
+    @Email(message = "Receiver email must be valid")
     private String receiverMail;
+
+    @NotBlank(message = "Sender email is required")
+    @Email(message = "Sender email must be valid")
     private String senderMail;
+
+    @NotBlank(message = "Subject is required")
+    @Size(max = 200, message = "Subject must not exceed 200 characters")
     private String subject;
+
+    @NotBlank(message = "Message is required")
+    @Size(max = 5000, message = "Message must not exceed 5000 characters")
     private String message;
 
     public EmailRequest() {
