@@ -1,0 +1,6 @@
+{
+  "receiverMail": "recipient@example.com",
+  "senderMail": "sender@gmail.com",
+  "subject": "Test Email from Spring Boot",
+  "message": "This is a test email sent using Spring Boot Email Sender Service with JavaMail integration."
+}
